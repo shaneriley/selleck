@@ -1,0 +1,17 @@
+%section#posts
+  %header
+    %h1 My Awexome Blog
+
+%script#post(type="text/selleck_tmpl")
+  %article(id="post_{{id}}")
+    %h1= link "{{title}}", "#"
+    %p.meta
+      By
+      %address= link "{{author}}", "#"
+      on
+      %time(datetime="{{post_date}}") {{post_date}}
+    %p {{content}}
+    %ul.tags
+      {{- tags.each do |tag| }}
+      %li {{tag}}
+      {{- end}}
