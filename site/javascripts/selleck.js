@@ -40,15 +40,11 @@ function selleck(tmpl, obj, opts) {
       return tmpl;
     },
     strip: function(html) {
-      var $frag = $(html),
-          regex = /\\{\\{.+\\}\\}/;
-      $frag.children().each(function() {
+      var $frag = $("<div />", { html: html }),
+          regex = /^\{\{.+\}\}$/;
+      $frag.find("*").each(function() {
         var $e = $(this);
-        console.dir($e);
-        if (regex.test($e.html())) { $e.remove(); }
-        else {
-          $e.replaceWith($e[0].outerHTML.replace(regex, ""));
-        }
+        if (regex.test($.trim($e.text()))) { $e.remove(); }
       });
       return $frag.html();
     }
@@ -61,6 +57,6 @@ function selleck(tmpl, obj, opts) {
     });
   }
   else { html = methods.parse(tmpl, obj); }
-  // if (opts.remove_empty_els) { html = methods.strip(html); }
+  if (opts.remove_empty_els) { html = methods.strip(html); }
   return html;
 }
