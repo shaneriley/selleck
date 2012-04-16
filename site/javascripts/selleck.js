@@ -1,4 +1,5 @@
 function selleck(tmpl, obj, opts) {
+  if (!tmpl) { return; }
   opts = $.extend({
     remove_empty_els: false
   }, opts);
@@ -20,7 +21,7 @@ function selleck(tmpl, obj, opts) {
           loop_regex,
           loops = (new RegExp(each_left + "(\\w+)\.each" + each_right)).exec(tmpl),
           fragment;
-      if (loops.length) { loops.slice(1); }
+      if (loops && loops.length) { loops.slice(1); }
       chain = chain || "";
       for (var v in obj) {
         if ($.isArray(obj[v])) {

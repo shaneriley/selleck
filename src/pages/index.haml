@@ -1,6 +1,8 @@
 %section#posts
   %header
     %h1 My Awexome Blog
+  %nav
+    %ul
 
 %script#post(type="text/selleck_tmpl")
   %article(id="post_{{id}}")
@@ -15,3 +17,6 @@
       {{- tags.each do |tag| }}
       %li {{tag}}
       {{- end}}
+
+%script#nav(type="text/selleck_tmpl")
+  %li= link "{{text}}", "{{href}}"

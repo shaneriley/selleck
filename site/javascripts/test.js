@@ -1,9 +1,15 @@
 $(function() {
   var view = {
     $el: $("#posts"),
-    tmpl: $("#post").html(),
+    post_tmpl: $("#post").html(),
+    link_tmpl: $("#nav").html(),
+    home_link: {
+      text: "Home",
+      href: "/"
+    },
     init: function() {
-      this.$el.find("header").after(selleck(this.tmpl, posts, { remove_empty_els: true }));
+      this.$el.append(selleck(this.post_tmpl, posts, { remove_empty_els: true }));
+      this.$el.find("nav").append(selleck(this.link_tmpl, this.home_link));
     }
   };
 
