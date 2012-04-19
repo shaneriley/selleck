@@ -9,7 +9,12 @@ function selleck(tmpl, obj, opts) {
     loop: function(tmpl, arr, var_name) {
       var html = "";
       $.each(arr, function(i, val) {
-        html += tmpl.replace(new RegExp("\\{\\{" + var_name + "\\}\\}", "g"), val);
+        if (typeof val === "object") {
+          html += methods.parse(tmpl, val, var_name + ".");
+        }
+        else {
+          html += tmpl.replace(new RegExp("\\{\\{" + var_name + "\\}\\}", "g"), val);
+        }
       });
       return html;
     },
