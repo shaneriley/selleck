@@ -16,7 +16,7 @@ function selleck(tmpl, obj, opts) {
           html += tmpl.replace(new RegExp("\\{\\{" + var_name + "\\}\\}", "g"), val);
         }
       });
-      return html.replace("$", "&#36;"));;
+      return html.replace("$", "&#36;");
     },
     parse: function(tmpl, obj, chain) {
       var prop_name,
