@@ -8,6 +8,9 @@ GEM
       sass (~> 3.1)
     fssm (0.2.8.1)
     haml (3.1.4)
+    oyster (0.9.5)
+    packr (3.2.0)
+      oyster (>= 0.9.5)
     rack (1.4.1)
     sass (3.1.14)
     staticmatic (0.11.1)
@@ -20,5 +23,6 @@ PLATFORMS
 
 DEPENDENCIES
   haml
+  packr
   sass
   staticmatic
