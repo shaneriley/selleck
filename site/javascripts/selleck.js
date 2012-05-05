@@ -13,10 +13,10 @@ function selleck(tmpl, obj, opts) {
           html += methods.parse(tmpl, val, var_name + ".");
         }
         else {
-          html += tmpl.replace(new RegExp("\\{\\{" + var_name + "\\}\\}", "g"), val);
+          html += tmpl.replace(new RegExp("\\{\\{" + var_name + "\\}\\}", "g"), val.replace("$", "&#36;"));
         }
       });
-      return html.replace("$", "&#36;");
+      return html;
     },
     parse: function(tmpl, obj, chain) {
       var prop_name,
