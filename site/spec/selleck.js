@@ -1,6 +1,6 @@
 $(function() {
   var setup = {
-    $dom: $("<div />", { id: "dom" }).appendTo(document.body).hide(),
+    $dom: $("<div />", { id: "dom" }).appendTo(document.body),
     tmpl: "<h1>{{heading}}</h1>\
             <p>{{paragraph}}</p>\
             <a href=\"{{href}}\">{{link}}</a>",
@@ -129,6 +129,20 @@ $(function() {
       $dom.find("li").each(function(i) {
         expect($dom.find("li").eq(i).text()).toEqual(data.tags[i]);
       });
+    });
+  });
+
+  describe("When I add a conditional to the template", function() {
+    it("I should see one tag list and one note", function() {
+      var $dom = setup.$dom.empty(),
+          tmpl = setup.tmpl,
+          data = [$.extend({ tags: ["$1,000", "$1,500", "$1,800"] }, setup.data), $.extend({}, setup.data)];
+      tmpl += "{{- if tags}}<ul>{{- tags.each do |tag|}}<li>{{tag}}</li>{{- end}}</ul>\
+               {{- else}}<div class=\"no_tags\">No tags</div>{{- end}}";
+      $dom.html(selleck(tmpl, data));
+      expect($dom.find("ul").length).toEqual(1);
+      expect($dom.find(".no_tags").length).toEqual(1);
+      assert.allPopulated(data);
     });
   });
 

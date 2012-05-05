@@ -56,7 +56,8 @@ function selleck(tmpl, obj, opts) {
     }
   };
 
-  var html = "";
+  var html = "",
+      conditionals = tmpl.match(new RegExp("\\{\\{-\\s*if (\\w+)\\s*}}"));
   if ($.isArray(obj)) {
     $.each(obj, function(i, data) {
       html += methods.parse(tmpl, data);
