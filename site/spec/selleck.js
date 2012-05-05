@@ -117,6 +117,21 @@ $(function() {
     });
   });
 
+  describe("When I have property values that begin with $1", function() {
+    it("I should see them output properly", function() {
+      var $dom = setup.$dom.empty(),
+          tmpl = setup.tmpl,
+          data = $.extend({ tags: ["$1,000", "$1,500", "$1,800"] }, setup.data);
+      tmpl += "<ul>{{- tags.each do |tag|}}<li>{{tag}}</li>{{- end}}</ul>";
+      $dom.html(selleck(tmpl, data));
+      expect($dom.find("li").length).toEqual(3);
+      assert.allPopulated(data);
+      $dom.find("li").each(function(i) {
+        expect($dom.find("li").eq(i).text()).toEqual(data.tags[i]);
+      });
+    });
+  });
+
   (function() {
     var jasmine_env = jasmine.getEnv();
     jasmine_env.updateInterval = 1000;
