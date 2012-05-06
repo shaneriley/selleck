@@ -138,7 +138,7 @@ $(function() {
           tmpl = setup.tmpl,
           data = [$.extend({ tags: ["$1,000", "$1,500", "$1,800"] }, setup.data), $.extend({}, setup.data)];
       tmpl += "{{- if tags}}<ul>{{- tags.each do |tag|}}<li>{{tag}}</li>{{- end}}</ul>\
-               {{- else}}<div class=\"no_tags\">No tags</div>{{- end}}";
+               {{- else}}<div class=\"no_tags\">No tags</div>{{- endif}}";
       $dom.html(selleck(tmpl, data));
       expect($dom.find("ul").length).toEqual(1);
       expect($dom.find(".no_tags").length).toEqual(1);

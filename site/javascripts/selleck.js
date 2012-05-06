@@ -57,7 +57,22 @@ function selleck(tmpl, obj, opts) {
   };
 
   var html = "",
-      conditionals = tmpl.match(new RegExp("\\{\\{-\\s*if (\\w+)\\s*}}"));
+      if_str = "{{-\\s*if (\\w+)\\s*}}",
+      else_str = "{{-\\s*else\\s*}}",
+      if_rxp = new RegExp(if_str, "g"),
+      conditions = tmpl.match(if_rxp),
+      conditionals = {};
+  if (conditions) {
+    $.each(tmpl.match(if_rxp), function(i, condition) {
+      var substr = tmpl.match(new RegExp(condition + ".+{{-\\s*endif\\s*}}")),
+          _if = (new RegExp(condition + "\(.+\)" + else_str)).exec(substr),
+          _else = (new RegExp(else_str + "(.+){{-\\s*endif")).exec(substr);
+      _if && _if.length && (_if = _if[1]);
+      _else && _else.length && (_else = _else[1]);
+      conditionals[if_rxp.exec(condition)[1]] = [_else, _if];
+    });
+  }
+  methods.conditionals = conditionals;
   if ($.isArray(obj)) {
     $.each(obj, function(i, data) {
       html += methods.parse(tmpl, data);
