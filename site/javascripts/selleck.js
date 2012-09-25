@@ -33,7 +33,7 @@ function selleck(tmpl, obj, opts) {
           prop_name = loops[$.inArray(v, loops)];
           if (prop_name) {
             var_name = (new RegExp(each_left + prop_name + "\.each do \\|\(.+\)\\|" + each_right)).exec(tmpl).slice(1).join("");
-            loop_regex = new RegExp(each_left + prop_name + ".+\\|" + var_name + "\\|\\s*\\}\\}\(.+\)\\{\\{- end\\}\\}");
+            loop_regex = new RegExp(each_left + prop_name + ".+\\|" + var_name + "\\|\\s*\\}\\}\(.+\)\\{\\{- end\\s\*\\}\\}");
             fragment = loop_regex.exec(tmpl).slice(1).join("");
             tmpl = tmpl.replace(loop_regex, methods.loop(fragment, obj[v], var_name));
           }
