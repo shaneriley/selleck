@@ -106,7 +106,7 @@ $(function() {
       tmpl += "<ul>\
                 {{- tags.each do |tag|}}\
                   <li><a href=\"{{tag.href}}\">{{tag.text}}</a></li>\
-                {{- end}}</ul>";
+                {{- end }}</ul>";
       $dom.html(selleck(tmpl, data));
       expect($dom.find("li").length).toEqual(3);
       $dom.find("li").each(function(i) {
